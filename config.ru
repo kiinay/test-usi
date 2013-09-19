@@ -1,2 +1,2 @@
-require './comb_site.rb'
+require './test_usi.rb'
 run Sinatra::Application
