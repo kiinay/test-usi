@@ -1,36 +1,28 @@
 %head
   %title Youpi !!!
+  %link(rel="stylesheet" type="text/css" href="/css/style.css")
   %script(src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript")
+  %script(src="/javascripts/jquery.isotope.js" type="text/javascript")
   :sass
-    body
-      overflow-y: hidden
     #container
       background-color: black
-      #content
-        display: block
-        .one, .two, .three, .four, .five, .six,
-          float: left
-          display: inline-block
-          background-color: white
-          border-style: solid
-          border-color: black
-          width: 501px
-          height: 501px
-          max-height: 100%
-          font-size: 30
-          text-align: center
+      overflow: hidden
+      height: 250px
+      .isotope-item
+        background-color: white
+        width: 250px
+        height: 250px
+        font-size: 30
+        text-align: center
 
-%body#container
-  #content
-    .one
-      1
-    .two
-      2
-    .three
-      3
-    .four
-      4
-    .five
-      5
-    .six
-      6
+%body
+  #container
+    - 20.times do |i|
+      .isotope-item(id="item#{i}") Item ##{i}
+
+  :coffee
+    $('#container').isotope
+      itemSelector: ".isotope-item"
+      layoutMode: 'masonryHorizontal'
+      masonryHorizontal:
+        rowHeight: 250
