@@ -8,7 +8,7 @@
       background-color: black
     #container
       overflow: hidden
-      height: 502px
+      height: 100%
       .isotope-item
         width: 250px
         height: 250px
@@ -58,3 +58,6 @@
         rowHeight: 251
       masonry:
         gutterWidth: 1
+      resizable: true
+      onLayout: ->
+        console.log this, arguments
