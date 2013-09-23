@@ -7,18 +7,40 @@
     #container
       background-color: black
       overflow: hidden
-      height: 250px
+      height: 502px
       .isotope-item
         background-color: white
         width: 250px
         height: 250px
         font-size: 30
         text-align: center
+      .size0
+        width: 501px
+        height: 501px
+        background-color: #ccc
+      .size1
+        background-color: #ddd
+        width: 501px
+        height: 250px
+      .size2
+        background-color: #eee
+      .size3
+        background-color: #fff
+      .size4
+        background-color: #eee
+      .size5
+        background-color: #eee
+      .size6
+        background-color: #eee
+      .size7
+        background-color: #eee
+      .size8
+        background-color: #eee
 
 %body
   #container
     - 20.times do |i|
-      .isotope-item(id="item#{i}") Item ##{i}
+      .isotope-item(id="item#{i}" class="size#{i%8}") Item ##{i}
 
   :coffee
     $('#container').isotope
@@ -26,3 +48,4 @@
       layoutMode: 'masonryHorizontal'
       masonryHorizontal:
         rowHeight: 250
+        gutterWidth: 10
