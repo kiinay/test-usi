@@ -4,38 +4,45 @@
   %script(src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript")
   %script(src="/javascripts/jquery.isotope.js" type="text/javascript")
   :sass
-    #container
+    body
       background-color: black
+    #container
       overflow: hidden
       height: 502px
       .isotope-item
-        background-color: white
         width: 250px
         height: 250px
+        border-bottom: solid white 1px
+        border-right: solid white 1px
         font-size: 30
         text-align: center
+      .size0,
+      .size2,
+      .size3,
+      .size5,
+      .size7
+        border-bottom-color: black
+
       .size0
         width: 501px
         height: 501px
-        background-color: #ccc
+        background-color: #bbb
       .size1
-        background-color: #ddd
+        background-color: #cbb
         width: 501px
         height: 250px
       .size2
-        background-color: #eee
+        background-color: #ccb
       .size3
-        background-color: #fff
+        background-color: #bcb
       .size4
-        background-color: #eee
+        background-color: #bcc
       .size5
-        background-color: #eee
+        background-color: #bbc
       .size6
-        background-color: #eee
+        background-color: #cbc
       .size7
-        background-color: #eee
-      .size8
-        background-color: #eee
+        background-color: #ccc
 
 %body
   #container
@@ -43,41 +50,11 @@
       .isotope-item(id="item#{i}" class="size#{i%8}") Item ##{i}
 
   :coffee
-    $.Isotope::_getMasonryGutterColumns = ->
-      gutter = @options.masonry and @options.masonry.gutterWidth or 0
-      containerWidth = @element.width()
-      
-      # Or use the size of the first item
-      
-      # If there's no items, use size of container
-      @masonry.columnWidth = @options.masonry and @options.masonry.columnWidth or @$filteredAtoms.outerWidth(true) or containerWidth
-      @masonry.columnWidth += gutter
-      @masonry.cols = Math.floor((containerWidth + gutter) / @masonry.columnWidth)
-      @masonry.cols = Math.max(@masonry.cols, 1)
-
-    $.Isotope::_masonryReset = ->
-      
-      # Layout-specific props
-      @masonry = {}
-      
-      # FIXME shouldn't have to call this again
-      @_getMasonryGutterColumns()
-      i = @masonry.cols
-      @masonry.colYs = []
-      @masonry.colYs.push 0  while i--
-
-    $.Isotope::_masonryResizeChanged = ->
-      prevSegments = @masonry.cols
-      
-      # Update cols/rows
-      @_getMasonryGutterColumns()
-      
-      # Return if updated cols/rows is not equal to previous
-      @masonry.cols isnt prevSegments
 
     $('#container').isotope
       itemSelector: ".isotope-item"
       layoutMode: 'masonryHorizontal'
       masonryHorizontal:
-        rowHeight: 250
-        gutterWidth: 10
+        rowHeight: 251
+      masonry:
+        gutterWidth: 1
