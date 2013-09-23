@@ -43,6 +43,38 @@
       .isotope-item(id="item#{i}" class="size#{i%8}") Item ##{i}
 
   :coffee
+    $.Isotope::_getMasonryGutterColumns = ->
+      gutter = @options.masonry and @options.masonry.gutterWidth or 0
+      containerWidth = @element.width()
+      
+      # Or use the size of the first item
+      
+      # If there's no items, use size of container
+      @masonry.columnWidth = @options.masonry and @options.masonry.columnWidth or @$filteredAtoms.outerWidth(true) or containerWidth
+      @masonry.columnWidth += gutter
+      @masonry.cols = Math.floor((containerWidth + gutter) / @masonry.columnWidth)
+      @masonry.cols = Math.max(@masonry.cols, 1)
+
+    $.Isotope::_masonryReset = ->
+      
+      # Layout-specific props
+      @masonry = {}
+      
+      # FIXME shouldn't have to call this again
+      @_getMasonryGutterColumns()
+      i = @masonry.cols
+      @masonry.colYs = []
+      @masonry.colYs.push 0  while i--
+
+    $.Isotope::_masonryResizeChanged = ->
+      prevSegments = @masonry.cols
+      
+      # Update cols/rows
+      @_getMasonryGutterColumns()
+      
+      # Return if updated cols/rows is not equal to previous
+      @masonry.cols isnt prevSegments
+
     $('#container').isotope
       itemSelector: ".isotope-item"
       layoutMode: 'masonryHorizontal'
